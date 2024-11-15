@@ -36,9 +36,9 @@ app.get('/agregarlugar.html', (req, res) => {
   res.sendFile(path.join(__dirname, './Frontend/html/agregarlugar.html'));
 });
 
-app.get('/registro.html', (req, res) => {
+/*app.get('/registro.html', (req, res) => {
   res.sendFile(path.join(__dirname, './Frontend/html/home.html'));
-});
+});*/
 
 app.get('/login.html', (req, res) => {
   res.sendFile(path.join(__dirname, './Frontend/html/home.html'));
@@ -56,8 +56,6 @@ app.use('/', viewRoutes);
 
 // Rutas de la API
 app.use('/api', userRoutes);
-//app.post('/api/registro', registro); // Post para registro
-//app.post("/api/login", login); // Post para login
 
 app.listen(3000, () => {
   console.log('Servidor escuchando en puerto 3000');

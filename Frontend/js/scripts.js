@@ -1,33 +1,40 @@
 
-function guardarDatos(email, password, confirm_password, nombre_usuario, fecha_nacimiento, lugar_usuario) {
-    // Aquí debemos hacer la lógica para guardar los datos en la base de datos
-    // Por ejemplo, si estás utilizando una biblioteca como Sequelize, puedes hacer algo como esto:
-    const registroUsuario = new RegistroUsuario({
-      email,
-      password,
-      confirm_password,
-      nombre_usuario,
-      fecha_nacimiento,
-      lugar_usuario,
-    });
-  
-    registroUsuario.save().then(() => {
-      console.log('Datos guardados con éxito');
-    }).catch((error) => {
-      console.error('Error al guardar datos:', error);
-    });
-  }
-  
 document.getElementById("register-button").addEventListener("click", function() {
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
-const confirm_password = document.getElementById("confirm-password").value;
-const nombre_usuario = document.getElementById("nombre_usuario").value;
-const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
-const lugar_usuario = document.getElementById("lugar_usuario").value;
-
-guardarDatos(email, password, confirm_password, nombre_usuario, fecha_nacimiento, lugar_usuario);
-});
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirm_password = document.getElementById("confirm-password").value;
+    const nombre_usuario = document.getElementById("nombre_usuario").value;
+    const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
+    const lugar_usuario = document.getElementById("lugar_usuario").value;
+  
+    fetch('/Frontend/html/registro.html', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        confirm_password,
+        nombre_usuario,
+        fecha_nacimiento,
+        lugar_usuario
+      })
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error al crear registro');
+      }
+    })
+    .then((registro) => {
+      console.log('Registro creado con éxito:', registro);
+    })
+    .catch((error) => {
+      console.error('Error al crear registro:', error);
+    });
+  });
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener elementos
     const modal = document.getElementById("modalElJardin");
